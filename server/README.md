@@ -39,3 +39,6 @@
   ```shell
   npm run seed
   ```
+
+## Collection (REST Client)
+- [Goals](/src/http/collection/goals.http)

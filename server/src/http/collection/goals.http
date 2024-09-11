@@ -6,3 +6,6 @@ content-type: application/json
   "title": "Nadar",
   "desiredWeeklyFrequency": 2
 }
+
+### Retorna as metas pendentes
+GET http://localhost:3333/pending-goals HTTP/1.1
