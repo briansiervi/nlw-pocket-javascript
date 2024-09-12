@@ -89,3 +89,6 @@ npm run dev
 ## Material complementar
 
 [Aqui](https://docs-rocketseat.notion.site/FullStack-Intermedi-rio-Node-React-b2382e372d1f44f6bfb51a3d7b723dfd) você encontra o material em que me baseei para construir esse projeto.
+
+Além disso, há alguns vídeos que nos ajudam a entender o que foi desenvolvido, que seguem:
+- [3 dicas para escalar apps React com TailwindCSS](https://www.youtube.com/watch?v=BhPyF0BQpF0&t=575s&ab_channel=Rocketseat)
