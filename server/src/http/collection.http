@@ -17,3 +17,6 @@ content-type: application/json
 {
   "goalId":"um4spgjb54mb3n1qhxr9ka6s"
 }
+
+### Retorna o resumo das metas
+GET http://localhost:3333/summary HTTP/1.1
