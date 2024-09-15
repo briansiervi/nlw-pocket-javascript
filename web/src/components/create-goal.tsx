@@ -159,7 +159,7 @@ export function CreateGoal() {
               </Button>
             </DialogClose>
 
-            <Button type="button" className="flex-1">
+            <Button type="submit" className="flex-1">
               Salvar
             </Button>
           </div>
