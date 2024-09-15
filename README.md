@@ -3,20 +3,89 @@
 ## Sumário <!-- omit in toc -->
 
 - [Back-end](#back-end)
-  - [Aplicação](#aplicação)
-  - [Docker](#docker)
-  - [Drizzle (ORM)](#drizzle-orm)
-  - [Seed](#seed)
+  - [Banco de dados](#banco-de-dados)
   - [Collection (REST Client)](#collection-rest-client)
 - [Front-end](#front-end)
-  - [Aplicação](#aplicação-1)
+- [Apêndice de comandos úteis](#apêndice-de-comandos-úteis)
+  - [Docker](#docker)
+  - [Drizzle (ORM)](#drizzle-orm)
 - [Material complementar](#material-complementar)
 
 ## Back-end
 
-### Aplicação
+O código-fonte do back-end se encontra na pasta [server](./server/).
+Na primeira execução é necessário instalar as dependências dentro dessa pasta, com o comando:
 
-O código-fonte do back-end se encontra [nesta pasta](./server/)
+  ```shell
+  npm i
+  ```
+
+### Banco de dados
+Na primeira execução precisamos criar o banco de dados postgres.
+
+1. Apontando para o banco de dados
+
+    Para subir esse banco localmente, podemos alterar a configuração do arquivo **.env** localizado na raiz da pasta [server](/server/) para:
+
+    ```js
+    DATABASE_URL='postgresql://docker:docker@localhost:5432/inorbit'
+    ```
+
+    E rodar o docker compose:
+
+    ```shell
+    docker compose up -d
+    ```
+
+    Como alternativa podemos criar um banco de dados novo em um servidor externo e alterar a constante para o padrão a seguir:
+
+    ```js
+    DATABASE_URL='postgresql://{usuario}:{senha}@{url}=require'
+    ```
+
+2. Criando as tabelas
+    Para criar as tabelas precisamos efetuar as migrations com o drizzle
+
+    ```shell
+    npx drizzle-kit migrate
+    ```
+
+3. Seed
+    Após ter as tabelas criadas, podemos populá-las rodando o script de seed configurado no arquivo [package.json](/server/package.json)
+
+    ```shell
+    npm run seed
+    ```
+
+    E também visualizá-las no navegador através do Drizzle, com o seguinte comando:
+
+    ```shell
+    npx drizzle-kit studio
+    ```
+
+    Acessando o endereço [https://local.drizzle.studio/](https://local.drizzle.studio/)
+
+Nas próximas execuções, caso tenha sido utilizado docker compose, o mesmo deverá ser executado novamente, com o mesmo comando:
+
+```shell
+docker compose up -d
+```
+
+### Collection (REST Client)
+
+[Aqui estão os endpoints](./server/src/http/collection.http) desta aplicação.
+
+Após executar o seed, você poderá testá-los instalando [esta extensão](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) no seu VsCode.
+
+
+## Front-end
+
+O código-fonte do back-end se encontra na pasta [web](./web/).
+Na primeira execução é necessário instalar as dependências dentro dessa pasta, com o comando:
+
+  ```shell
+  npm i
+  ```
 
 Para iniciar a aplicação rode o comando a seguir:
 
@@ -24,16 +93,13 @@ Para iniciar a aplicação rode o comando a seguir:
 npm run dev
 ```
 
+## Apêndice de comandos úteis
+
 ### Docker
-
-Para iniciar a aplicação rode o comando a seguir:
-
-```shell
-docker compose up -d
-```
-
-Caso ocorra algum erro, você pode investigar o que está ocorrendo com os seguintes comandos:
-
+- Subir o docker
+    ```shell
+    docker compose up -d
+    ```
 - Verificar se o container está rodando
   ```shell
   docker ps
@@ -44,9 +110,6 @@ Caso ocorra algum erro, você pode investigar o que está ocorrendo com os segui
   ```
 
 ### Drizzle (ORM)
-
-Esses são os comandos básicos utilizados no projeto para criação de tabelas via migrations:
-
 - Criar migração
   ```shell
   npx drizzle-kit generate
@@ -59,32 +122,6 @@ Esses são os comandos básicos utilizados no projeto para criação de tabelas 
   ```shell
   npx drizzle-kit studio
   ```
-
-### Seed
-
-Para popular o banco de dados na primeira execução do projeto, execute o seguinte comando:
-
-```shell
-npm run seed
-```
-
-### Collection (REST Client)
-
-[Aqui estão os endpoints](./server/src/http/collection.http) desta aplicação.
-
-Após executar o seed, você poderá testá-los instalando [esta extensão](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) no seu VsCode.
-
-## Front-end
-
-### Aplicação
-
-O código-fonte do back-end se encontra [nesta pasta](./web/)
-
-Para iniciar a aplicação rode o comando a seguir:
-
-```shell
-npm run dev
-```
 
 ## Material complementar
 
